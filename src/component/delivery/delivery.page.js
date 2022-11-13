@@ -108,12 +108,12 @@ const DeliveryPage = () => {
                       type="email"
                       className={"form-control " + (errors.email ? "invalid" : "valid")}
                       {...register("email", {
-                        required: true,
+                        // required: true,
                         pattern: {
                           value: /^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[A-Za-z]+$/,
                         },
                       })}
-                      // required
+                      required
                       onKeyUp={() => {
                         trigger("email");
                       }}
@@ -122,22 +122,23 @@ const DeliveryPage = () => {
                     {/* <label>Email</label> */}
                   </FormItem>
                   <FormItem>
-                    <input type="text" className="form-control" required disabled={checkBoxValue} onChange={handleCheckbox} />
-                    <label>Dropshipper name</label>
+                    <input type="text" className="form-control" required disabled={checkBoxValue} onChange={handleCheckbox} placeholder="Dropshipper Name" />
+                    {/* <label>Dropshipper name</label> */}
                   </FormItem>
                 </FormGroup>
                 <FormGroup>
                   <FormItem>
                     <input
-                      type="text"
+                      type="tel"
                       className={"form-control " + (errors.phone ? "invalid" : "valid")}
                       {...register("phone", {
-                        required: true,
                         pattern: {
-                          value: /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im,
+                          value: /^\(?(\d{3})\)?[- ]?(\d{3})[- ]?(\d{4})$/,
                         },
+                        minLength: 6,
+                        maxLength: 12,
                       })}
-                      // required
+                      required
                       onKeyUp={() => {
                         trigger("phone");
                       }}
@@ -146,13 +147,24 @@ const DeliveryPage = () => {
                     {/* <label>Phone Number</label> */}
                   </FormItem>
                   <FormItem>
-                    <input type="text" className="form-control" required disabled={checkBoxValue} onChange={handleCheckbox} />
-                    <label>Dropshipper phone number</label>
+                    <input type="text" className="form-control" required disabled={checkBoxValue} onChange={handleCheckbox} placeholder="Dropshipper Phone Number" />
+                    {/* <label>Dropshipper phone number</label> */}
                   </FormItem>
                 </FormGroup>
                 <FormItem>
-                  <textarea type="text" className="textarea" required />
-                  <label>Delivery Address</label>
+                  <textarea
+                    type="text"
+                    className={"textarea " + (errors.text ? "invalid" : "valid")}
+                    {...register("text", {
+                      // required: true,
+                    })}
+                    required
+                    onKeyUp={() => {
+                      trigger("text");
+                    }}
+                    placeholder="Delivery Address"
+                  />
+                  {/* <textarea type="text" className="textarea" required /> */}
                 </FormItem>
               </FormInfo>
             </Form>
